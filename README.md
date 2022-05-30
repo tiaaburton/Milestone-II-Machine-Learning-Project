@@ -13,7 +13,7 @@ You will need the following things properly installed on your computer.
 * [Git](https://git-scm.com/downloads)
 * [Python3.6+](https://www.python.org/downloads/)
 
-### NOTE: If you have already setup the environment below, you can run the following: `make`
+### NOTE: If you have already setup the environment below, you can run the following under `ml_pipeline`: `make`
 
 ## Setup Env
 
