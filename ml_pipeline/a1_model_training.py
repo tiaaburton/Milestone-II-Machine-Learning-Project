@@ -56,14 +56,12 @@ def pyspark_column_prep(dataset):
 
 def return_samples(df):
   unbalanced_df = df.withColumn('label', when(col('label')==0.0, 0).otherwise(1.0))
-  label_balance = unbalanced_df.groupBy('label').count().withColumnRenamed('count','unbalanced_count')
-  
-  unbalanced_df = df.withColumn('label', when(col('label')==0.0, 0).otherwise(1.0))
   downsample_df = downsampling(unbalanced_df)
   random_df = take_random_sample(unbalanced_df)
   return unbalanced_df, downsample_df, random_df
 
 def downsampling(data):
+  label_balance = data.groupBy('label').count().withColumnRenamed('count','unbalanced_count')
   df = data.withColumn('rand_col', rand())
   balanced_data = df.withColumn(
       "row_num",row_number().over(Window.partitionBy("label")\
@@ -110,24 +108,24 @@ def cv_model(model, train, test, param_grid=None):
   test_eval = crossval.getEvaluator().evaluate(prediction_res)
   return best_model, train_eval, test_eval, validation_res, prediction_res
 
-def save_model(df, model, file_loc, model_name):
-  dataset = df.iloc[idx]['Test_Dataset'].split("_")[-1]
+def save_model(df, idx, model, file_loc, file_name):
+  dataset = df.iloc[idx]['Dataset'].split("_")[-1]
   col_num = df.iloc[idx]['Col_Num']
-  f_name = df.iloc[idx]['Model'] + f'run{idx}_{dataset}_{col_num}_col'
-  filename = file_loc + '/' + f"a1_{f_name}_model.sav"
+  f_name = df.iloc[idx]['Model'] + f'_run{idx}_{dataset}_{col_num}_col'
+  filename = file_loc + file_name
   try:
     model.save(filename)
   except:
     model.write().overwrite().save(filename)
   return
 
-def train_spark_models(spark_datasets, spark_models, param_grids, filters):
+def train_spark_models(spark_datasets, spark_models, param_grids, filters, models):
 
   trained_models = []
   df = pd.DataFrame()
   datasets = []
 
-  for model in ['spark_lr', 'spark_dt', 'spark_rf']:
+  for model in models:
     for names, data in spark_datasets.items():
       train_name, test_name = names
       X_train, X_test = data
@@ -159,7 +157,7 @@ def train_spark_models(spark_datasets, spark_models, param_grids, filters):
                                'Start_Time', 'End_Time'])
           df3 = pd.DataFrame([[model, test_name, filter, len(filter), test_eval, test_recall, 
                                test_precision, test_f1Score, best_params, start_time, end_time]],
-                      columns=['Model', 'Dataset', 'Column_Filter', 'Col_Num',
+                      columns=['Model', 'Dataset','Column_Filter', 'Col_Num',
                                'AUC', 'Recall', 'Precision', 'F1-Score', 'Best_Params',
                                'Start_Time', 'End_Time'])
           if len(df) == 0:
@@ -188,20 +186,20 @@ def post_processing(df):
         df[param[0]].iloc[idx] = param[1]
   return df
 
-def save_models(models:list, directory:str, force:bool=False):
-
-  for idx,model in enumerate(models):
-    try:
-      col_count = len(df.iloc[idx]['Column_Filter'])
-      f_name = df.iloc[idx]['Model'] + f'_{col_count}MIcol_run{idx}'
-      path_name = directory + f'a1_{f_name}_model.sav'
-      if not os.path.isdir(path_name):
-        save_model(model, directory, f_name, sklearn_model=False)
-      elif os.path.isdir(path_name) and force == True:
-        save_model(model, directory, f_name, sklearn_model=False)
-        print('Passed: ', model)
-    except Exception as e:
-      print(f'Failed because {e};', model)
+def save_models(df, models:list, directory:str, force:bool=False):
+  if force == True:
+    for idx,model in enumerate(models):
+      try:
+        col_count = len(df.iloc[idx]['Column_Filter'])
+        f_name = df.iloc[idx]['Model'] + f'_{col_count}MIcol_run{idx}'
+        path_name = directory + f'a1_{f_name}_model.sav'
+        if force == True:
+          save_model(df, idx, model, directory, f_name)
+          print('Passed: ', model)
+      except Exception as e:
+        print(f'Failed because {e};', model)
+      else:
+        print('Unable to save models. Troubleshooting needed.')
   return
 
 def parse_args() -> Namespace:
@@ -224,10 +222,14 @@ def parse_args() -> Namespace:
   )
   parser.add_argument(
     "--output_result_directory",
-    help="The output directory of all visualizations created",
+    help="The output directory of all results created",
     type=str
   )
-  
+  parser.add_argument(
+    "--save", "-s",
+    help="Force the models to be stored.",
+    type=bool
+  )
   return parser.parse_args()
 
 if __name__ == "__main__":
@@ -236,8 +238,11 @@ if __name__ == "__main__":
   input_dataset = parsed_args.input_dataset
   output_directory = parsed_args.output_directory
   output_visualization_directory = parsed_args.output_visualization_directory
+  output_result_directory = parsed_args.output_result_directory
+  save = parsed_args.save
 
   print(input_dataset, output_directory, output_visualization_directory)
+  
   spark = SparkSession.builder \
     .master("local[*]") \
     .appName("Binary Buyer Prediction") \
@@ -311,14 +316,11 @@ if __name__ == "__main__":
 
   models, df, datasets = train_spark_models(spark_datasets, spark_models, param_grids,
                     [filter1, filter2, filter3], ['spark_lr', 'spark_dt', 'spark_rf'])
-  save_models(models)
-
-  df = post_processing(df)
-  df = df.reset_index()
-
   df.sort_values(['F1-Score','AUC'],ascending=False)\
-    .to_csv(output_result_directory +' /a1_final_results.csv')
-  
+    .to_csv(output_result_directory +'a1_final_results.csv')
+
+  save_models(df, models, output_directory, force=save)
+
   titles = ["Likelihood to Buy Binary Classification",
             "Logistic Regression Params vs F1-Score in Likelihood to Buy Binary Classification",
             "Logistic Regression F1-Score in Likelihood to Buy Binary Classification",
@@ -326,19 +328,19 @@ if __name__ == "__main__":
             "Logistic Regression Precision Scores in Likelihood to Buy Binary Classification"]
 
   fig1 = px.scatter(df, x="AUC", y="F1-Score", facet_col="Col_Num", facet_row="Model", 
-                 title=titles[0], color='Train_Dataset'
+                 title=titles[0], color='Dataset'
                  )
   fig2 = px.scatter_3d(df[df['Model']=='spark_lr'], x="regParam", y="elasticNetParam",
-                       z="F1-Score", title=titles[1], color='Train_Dataset', symbol='Col_Num'
+                       z="F1-Score", title=titles[1], color='Dataset', symbol='Col_Num'
           )
   fig3 = px.bar(df[df['Model']=='spark_lr'], x="index", y="F1-Score", 
-                color="Train_Dataset", text_auto='.2', title=titles[2], 
+                color="Dataset", text_auto='.2', title=titles[2], 
           )
   fig4 = px.bar(df[df['Model']=='spark_lr'], x="index", y="Recall", 
-                color="Train_Dataset", text_auto='.2', title=titles[3], 
+                color="Dataset", text_auto='.2', title=titles[3], 
           )
   fig5 = px.bar(df[df['Model']=='spark_lr'], x="index", y="Precision", 
-                color="Train_Dataset", text_auto='.2', title=titles[4], 
+                color="Dataset", text_auto='.2', title=titles[4], 
           )
   
   for idx,fig in enumerate([fig1, fig2, fig3, fig4, fig5]):
@@ -346,4 +348,4 @@ if __name__ == "__main__":
     fig.write_html(file_name + '.html')
     fig.write_image(file_name + '.png')
 
-  spark.stop()
+  spark.sparkContext.stop()
