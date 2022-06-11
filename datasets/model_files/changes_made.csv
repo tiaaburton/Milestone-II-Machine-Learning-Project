@@ -1,0 +1,44 @@
+,idx,type,Unique_ct,ct_nan,Counter,min,max,mean
+socialEngagementType,socialEngagementType,int64,1,0,"[(0, 55381)]",0,0,0.0
+totals.hits,totals,int64,211,0,"[(1, 24516), (2, 8220), (3, 3532), (4, 2252), (5, 1679)]",1,500,8.152904425705566
+totals.pageviews,totals,float64,157,0,"[(1.0, 24850), (2.0, 8607), (3.0, 3732), (4.0, 2374), (5.0, 1828)]",0.0,469.0,6.547407955797114
+totals.timeOnSite,totals,float64,2695,0,"[(0.0, 24783), (51.0, 465), (5.0, 440), (4.0, 436), (50.0, 382)]",0.0,15047.0,216.71779130026545
+totals.transactions,totals,float64,8,0,"[(0.0, 49516), (1.0, 5671), (2.0, 155), (3.0, 19), (5.0, 9)]",0.0,8.0,0.11095863202181254
+totals.newVisits,totals,int64,2,0,"[(1, 41676), (0, 13705)]",0,1,0.7525324569798306
+totals.bounces,totals,int64,2,0,"[(0, 30667), (1, 24714)]",0,1,0.44625413047796175
+hits.eCommerceAction.action_type,hits,int64,7,0,"[(0, 55010), (1, 148), (2, 103), (3, 73), (4, 29)]",0,6,0.014102309456311732
+Monetary,Monetary,float64,2185,0,"[(0.0, 49520), (24.0, 70), (25.0, 67), (20.0, 59), (26.0, 55)]",0.0,16032.8,15.484120907892601
+buyers,buyers,int64,2,0,"[(0, 49520), (1, 5861)]",0,1,0.10583051949224463
+Frequency,Frequency,int64,18,0,"[(1, 48833), (2, 4118), (3, 1137), (4, 508), (5, 220)]",1,21,1.24820786912479
+repurchasers,repurchasers,int64,2,0,"[(0, 53971), (1, 1410)]",0,1,0.025459995305249093
+Recency,Recency,int64,184,0,"[(64, 547), (77, 525), (119, 497), (61, 479), (57, 478)]",0,183,92.1798270164858
+hits.hour_ordinal,hits,int64,3,0,"[(2, 23840), (1, 17261), (0, 14280)]",0,2,1.1726223795164405
+channelGrouping_Direct,channelGrouping_Direct,uint8,2,0,"[(0, 47463), (1, 7918)]",0,1,0.14297322186309383
+channelGrouping_Display,channelGrouping_Display,uint8,2,0,"[(0, 54976), (1, 405)]",0,1,0.007312977374911973
+channelGrouping_Organic Search,channelGrouping_Organic Search,uint8,2,0,"[(0, 36136), (1, 19245)]",0,1,0.3475018508152615
+channelGrouping_Paid Search,channelGrouping_Paid Search,uint8,2,0,"[(0, 53819), (1, 1562)]",0,1,0.028204618912623464
+channelGrouping_Referral,channelGrouping_Referral,uint8,2,0,"[(0, 47548), (1, 7833)]",0,1,0.14143839945107528
+channelGrouping_Social,channelGrouping_Social,uint8,2,0,"[(0, 37745), (1, 17636)]",0,1,0.31844856539246313
+geoNetwork.country_woe,geoNetwork,float64,56,0,"[(0.9473578084268521, 23746), (0.0, 5778), (-4.312456764522926, 2526), (-3.0203906052462863, 1742), (-5.321242094801242, 1730)]",-5.321242094801242,2.1340563908820487,-0.9882194264014534
+trafficSource.source_woe,trafficSource,float64,29,2,"[(0.6005773508730065, 27422), (-5.824753586001312, 17170), (-0.008708829583387423, 7047), (-3.42534236632059, 782), (2.2204460492503128e-16, 575)]",-5.824753586001312,2.8272035714419936,-1.562355603405633
+trafficSource.medium_affiliate,trafficSource,uint8,2,0,"[(0, 54599), (1, 782)]",0,1,0.014120366190570773
+trafficSource.medium_cpc,trafficSource,uint8,2,0,"[(0, 54919), (1, 462)]",0,1,0.008342211227677362
+trafficSource.medium_cpm,trafficSource,uint8,2,0,"[(0, 54976), (1, 405)]",0,1,0.007312977374911973
+trafficSource.medium_organic,trafficSource,uint8,2,0,"[(0, 48401), (1, 6980)]",0,1,0.12603600512811253
+trafficSource.medium_referral,trafficSource,uint8,2,0,"[(0, 36051), (1, 19330)]",0,1,0.3490366732272801
+trafficSource.isTrueDirect_code,trafficSource,int8,2,0,"[(0, 38404), (1, 16977)]",0,1,0.3065491775157545
+device.browser_woe,device,float64,11,0,"[(0.3034410764780771, 38027), (-1.2462255250575016, 12182), (-0.8679064324225786, 2028), (-0.5411059433753266, 1055), (0.0, 632)]",-3.0533294149587062,0.3034410764780771,-0.15219283930636712
+device.operatingSystem_Android,device,uint8,2,0,"[(0, 49664), (1, 5717)]",0,1,0.1032303497589426
+device.operatingSystem_BlackBerry,device,uint8,2,0,"[(0, 55369), (1, 12)]",0,1,0.00021668081110850292
+device.operatingSystem_Chrome OS,device,uint8,2,0,"[(0, 53648), (1, 1733)]",0,1,0.03129232047091963
+device.operatingSystem_Firefox OS,device,uint8,2,0,"[(0, 55374), (1, 7)]",0,1,0.00012639713981329336
+device.operatingSystem_Linux,device,uint8,2,0,"[(0, 53162), (1, 2219)]",0,1,0.040067893320814
+device.operatingSystem_Macintosh,device,uint8,2,0,"[(0, 36243), (1, 19138)]",0,1,0.34556978024954405
+device.operatingSystem_Nintendo Wii,device,uint8,2,0,"[(0, 55370), (1, 11)]",0,1,0.00019862407684946101
+device.operatingSystem_Samsung,device,uint8,2,0,"[(0, 55369), (1, 12)]",0,1,0.00021668081110850292
+device.operatingSystem_Windows,device,uint8,2,0,"[(0, 34207), (1, 21174)]",0,1,0.3823332912009534
+device.operatingSystem_Windows Phone,device,uint8,2,0,"[(0, 55289), (1, 92)]",0,1,0.0016612195518318556
+device.operatingSystem_Xbox,device,uint8,2,0,"[(0, 55379), (1, 2)]",0,1,3.611346851808382e-05
+device.operatingSystem_iOS,device,uint8,2,0,"[(0, 50332), (1, 5049)]",0,1,0.0911684512739026
+device.deviceCategory_mobile,device,uint8,2,0,"[(0, 45723), (1, 9658)]",0,1,0.17439193947382675
+device.deviceCategory_tablet,device,uint8,2,0,"[(0, 53838), (1, 1543)]",0,1,0.027861540961701667

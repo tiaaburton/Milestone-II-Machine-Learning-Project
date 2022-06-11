@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+'''Used for first ML model in our pipeline.'''
+=======
+>>>>>>> 5b0eb06c41cea5fb7ef35dc5e473ab7dd93028c3
 X_train_spark = spark.createDataFrame(X_train)
 X_val_spark = spark.createDataFrame(X_val)
 y_train_spark = ps.from_pandas(y_train)
 y_val_spark = ps.from_pandas(y_val)
+<<<<<<< HEAD
 =======
 import pandas as pd
 import numpy as np
@@ -283,3 +290,6 @@ if __name__ == '__main__':
   df = df.reset_index()
   df.sort_values(['F1-Score','AUC'],ascending=False).to_csv('/content/drive/Shareddrives/SIADS - 694-695 Team Drive/results/a1_final_results.csv')
 >>>>>>> Stashed changes
+=======
+>>>>>>> e71cd00eaf081f58f0d6bc90abf0653ee5c8f4ef
+>>>>>>> 5b0eb06c41cea5fb7ef35dc5e473ab7dd93028c3

@@ -1,0 +1,43 @@
+,feature,importance
+0,Frequency,0.8626647389272503
+1,channelGrouping_Organic Search,0.01817720718509018
+2,Monetary,0.016707180105817145
+3,channelGrouping_Direct,0.012295209751090544
+4,totals.timeOnSite,0.011119207277461903
+5,totals.pageviews,0.010012481758793837
+6,channelGrouping_Referral,0.009129065315048729
+7,Recency,0.008044090914501987
+8,channelGrouping_Paid Search,0.005761877998246554
+9,trafficSource.medium_cpm,0.004599542913452809
+10,trafficSource.medium_referral,0.004566293966799045
+11,hits.hour_ordinal,0.00455522685965397
+12,geoNetwork.country_woe,0.0043395415727116166
+13,device.operatingSystem_Linux,0.004314187243082622
+14,totals.hits,0.003972729623929231
+15,device.operatingSystem_iOS,0.0028149935408655702
+16,trafficSource.isTrueDirect_code,0.0027099526439167887
+17,device.operatingSystem_Windows,0.002709935997910708
+18,totals.newVisits,0.0023084972866095387
+19,device.operatingSystem_Macintosh,0.0021645335943932475
+20,device.deviceCategory_mobile,0.001842222319475965
+21,device.operatingSystem_Chrome OS,0.0018402330933454483
+22,device.browser_woe,0.0011661920099493583
+23,device.operatingSystem_Android,0.0009235713224544305
+24,trafficSource.medium_organic,0.000597364606995608
+25,trafficSource.source_woe,0.0003632733255788857
+26,hits.eCommerceAction.action_type,0.00030064884557396923
+27,socialEngagementType,0.0
+28,totals.transactions,0.0
+29,totals.bounces,0.0
+30,channelGrouping_Display,0.0
+31,channelGrouping_Social,0.0
+32,trafficSource.medium_affiliate,0.0
+33,trafficSource.medium_cpc,0.0
+34,device.operatingSystem_BlackBerry,0.0
+35,device.operatingSystem_Firefox OS,0.0
+36,device.operatingSystem_Nintendo Wii,0.0
+37,device.operatingSystem_Samsung,0.0
+38,device.operatingSystem_Windows Phone,0.0
+39,device.operatingSystem_Xbox,0.0
+40,device.deviceCategory_tablet,0.0
+41,buyers,0.0
