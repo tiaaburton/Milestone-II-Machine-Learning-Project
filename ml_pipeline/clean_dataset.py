@@ -37,7 +37,7 @@ if __name__ == '__main__':
   args = parser.parse_args()
   
   sample = pd.read_csv(args.input_file)
-  sample = drop_columns(sample)
+  # sample = drop_columns(sample)
   sample = set_datatypes(sample)
   sample.to_csv(args.output_file, header=True)
 
